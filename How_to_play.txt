@@ -1,0 +1,4 @@
+Press the play button on your unity engine
+Press And Hold "W button" on keyboard to grip the branches and move forward
+Dodge the obstacles to save your character from injuries
+Landing on the platform will also result in decrease in health

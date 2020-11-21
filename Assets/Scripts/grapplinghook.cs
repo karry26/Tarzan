@@ -23,10 +23,10 @@ public class grapplinghook : MainMenu
     [SerializeField] GameObject blood;
     [SerializeField] GameObject scoreTxt;
     [SerializeField] List<GameObject> backgrounds;
-    public float health;
-    public int score;
-    public int coins;
-    public int dist;
+    static public float health;
+    static public int score;
+    static public int coins;
+    static public int dist;
    
     void Start()
     {
@@ -51,7 +51,7 @@ public class grapplinghook : MainMenu
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-     
+        SoundManager.PlaySound("hit");
         health -= 10;
         if (health <= 0) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         // Debug.Log(health);
@@ -69,6 +69,7 @@ public class grapplinghook : MainMenu
             coins++;
             //score+=1000;
             Destroy(collision.gameObject);
+            SoundManager.PlaySound("coin");
         }
     }
     void Update()
@@ -83,10 +84,12 @@ public class grapplinghook : MainMenu
             dist = (int)transform.position.x;
             score = dist + 50 * coins;
         }
-       
-        
-        if (Input.GetKeyDown(KeyCode.W))
-        {
+
+
+        // if (Input.GetKeyDown(KeyCode.W))
+        //{
+        if (Input.GetMouseButtonDown(0) ){
+            SoundManager.PlaySound("jump");
             
          //   Debug.Log("yes");
             // targetpos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -115,8 +118,9 @@ public class grapplinghook : MainMenu
             }
             
         }
-        if(Input.GetKey(KeyCode.W))
-        {
+        // if(Input.GetKey(KeyCode.W))
+        //{
+        if (Input.GetMouseButton(0)){ 
           //  Debug.Log(joint.distance);
             line.SetPosition(0, transform.position);
             if (joint.distance > 4f) joint.distance -= step;
@@ -128,7 +132,7 @@ public class grapplinghook : MainMenu
             }
 
         }
-        if (Input.GetKeyUp(KeyCode.W))
+        if (Input.GetMouseButtonUp(0))
         {
            // Debug.Log("yes2");
            joint.enabled = false;
